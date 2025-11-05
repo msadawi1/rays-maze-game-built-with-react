@@ -1,12 +1,22 @@
-@import "tailwindcss";
-
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
 
-html, body, h1, h2, h3, h4, h5, h6, p, figure, blockquote, dl, dd {
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+figure,
+blockquote,
+dl,
+dd {
   margin: 0;
 }
 
@@ -22,8 +32,11 @@ html {
 
 /* Root variables (feel free to customize) */
 :root {
-  --bg: #ffffff;
-  --text: #0f172a;
+  --bg: oklch(28.2% 0.091 267.935);
+  --button: oklch(84.1% 0.238 128.85);
+  --button-hover: oklch(95.912% 0.1146 123.57);
+  --text: oklch(84.1% 0.238 128.85);
+  --text-hover: oklch(92.234% 0.18221 125.31);
   --muted: #6b7280;
   --radius-sm: 6px;
   --space-sm: 12px;
@@ -32,16 +45,15 @@ html {
 /* Page defaults */
 body {
   min-height: 100vh;
-  background-color: var(--bg);
   color: var(--text);
+  background: linear-gradient(180deg, rgb(3, 29, 36) 0%, rgba(9, 56, 121, 1) 55%, rgba(3, 98, 105, 1) 100%);
   font-family: inherit;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Headings */
-h1, h2, h3, h4, h5, h6 {
-  line-height: 1.2;
+.transition {
+  transition: all 0.15s ease-in-out;
 }
 
 /* Links */
@@ -50,21 +62,52 @@ a {
   text-decoration: none;
 }
 
-a:hover, a:focus {
-  text-decoration: underline;
+a:hover,
+a:focus {
+  color: var(--text-hover);
+  text-shadow: 0px 0px 1.5rem var(--text-hover);
 }
 
 /* Form elements inherit font */
-button, input, textarea, select {
+button,
+input,
+textarea,
+select {
   font: inherit;
   color: inherit;
 }
 
 /* Basic button reset */
 button {
-  background: transparent;
-  border: none;
-  cursor: pointer;
+  font-size: clamp(1rem, 4vw, 1.2rem);
+  outline: none;
+  color: oklch(94.991% 0.13367 126.076);
+  box-shadow: inset 0 0 1rem var(--button), 0 0 0.3rem var(--button);
+  background-color: oklch(45.3% 0.124 130.933);
+  padding: 0.1rem 0.6rem;
+  border-radius: 0.5rem;
+  border: 0.2rem solid oklch(62.346% 0.15517 130.914);
+}
+
+button:hover {
+  box-shadow: inset 0 0 1rem var(--button-hover), 0 0 0.3rem var(--button-hover);
+  transform: scale(1.03);
+}
+
+.reset-btn {
+  color: oklch(60.919% 0.10183 109.764);
+  background-color: oklch(90% 0.15 110);
+  border: 0.2rem solid oklch(80% 0.12 110);
+  box-shadow:
+    inset 0 0 1rem oklch(90% 0.18 110),
+    0 0 0.6rem oklch(95% 0.13 120);
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.reset-btn:hover {
+  box-shadow:
+    inset 0 0 1.2rem oklch(95% 0.16 115),
+    0 0 0.8rem oklch(96% 0.18 120);
 }
 
 /* Accessibility helper */
@@ -78,4 +121,41 @@ button {
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
   border: 0;
+}
+
+.header {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem clamp(1rem, 8vw, 6rem);
+  color: var(--text);
+}
+
+.header>a {
+  font-size: clamp(2.5rem, 5vw, 3rem);
+  font-weight: 600;
+  text-shadow: 0px 0px 1.5rem var(--text);
+}
+
+.header-controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(1rem, 2vw, 1.5rem);
+}
+
+hr {
+  height: 1px;
+  border-color: var(--text);
+  box-shadow: 0px 0px 12px var(--text);
+}
+
+@media screen and (min-width: 37.5em) {
+  .header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
